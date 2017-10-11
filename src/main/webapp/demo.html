@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+<style>
+  a {
+    text-decoration: none;
+  }
+</style>
+<script>
+  function f1(){
+	  $('a1').click();
+	  $.ajax({
+		  "url":"demo.do",
+		  "type":"get",
+		  "dataType":"json",
+		  "success":function(data){
+			 
+			  $('#s1').html(data);
+			  
+		  },
+	  });
+  };
+  $(function(){
+	  $('#a2').click(f2);
+  })
+  function f2(){
+	  $('#s1').load("demo.do");
+  }
+</script>
+</head>
+<body>
+  <a id="a1" href="javascript:f1()">点击这,显示一个整数</a><br>
+  <a id="a2" href="javascript:">点击这,显示一个整数</a><br>
+  <span id="s1"></span>
+</body>
+</html>

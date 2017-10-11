@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+  function f1(){
+	  var s = {"code":"142512","name":"中国嘉陵","price":80};
+	  alert(s.name);
+  }
+  function f2(){
+	  var obj = {"name":"北京达内",
+			  "adress":{"city":"北京","street":"北三环西路18号","room":708}
+	  }
+	  alert(obj.adress.room);
+	  
+  }
+  
+  //使用json语法表示由对象组成的数组
+  function f3(){
+	  var arr = [{"name":"关晓彤","age":18},
+	             {"name":"鹿晗","age":20},
+	             {"name":"Sally","age":21}];
+	  alert(arr[1].name+":"+arr[1].age);
+	  prompt("请输入你的看法");
+	  
+  }
+  //将json字符串转换为js对象
+  function f4(){
+	  var str = '{"name":"关晓彤","age":18}';
+	  //使用js内置对象JSON的parse方法来转换
+	  var obj =JSON.parse(str);
+	  alert(obj.name+":"+obj.age);
+	  
+  }
+  function f5(){
+	  var str = '[{"name":"关晓彤","age":18},'+
+	              '{"name":"鹿晗","age":20}]';
+	  var arr = JSON.parse(str);
+	  alert(arr[0].name+" "+arr[1].name);
+  }
+</script>
+</head>
+<body>
+  <a href="javascript:f1();">ClickMe1</a>
+  <a href="javascript:f2();">ClickMe2</a>
+  <a href="javascript:f3();">ClickMe3</a>
+  <a href="javascript:f4();">ClickMe4</a>
+  <a href="javascript:f5();">ClickMe5</a>
+</body>
+</html>

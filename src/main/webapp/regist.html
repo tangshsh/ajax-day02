@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>
+</title>
+<link href="dist/css/bootstrap-theme.css">
+<link href="dist/css/bootstrap-theme.min.css">
+<link href="dist/css/bootstrap.css">
+<link href="dist/css/bootstrap.min.css">
+<script src="js/jquery-1.11.1.js"></script>
+<style>
+  .right {
+    color:green;
+  }
+  .error {
+    color:red;
+  }
+</style>
+<script>
+ $(function(){
+	 $('#i1').blur(f1);
+	 $('#i2').blur(f2);
+	 $('#b1').click(f3);
+	 $('#i1').focus(f4);
+	 $('#i2').focus(f5);
+	
+ })
+ function f1(){
+	 $.ajax({
+		 "url":"check.do",
+		 "type":"post",
+		 "data":"uname="+$("#i1").val(),
+		 "dataType":"json",
+		 "success":function(data){
+			 console.log(data);
+			 $('#s1').html(data);
+			 if(-1!=data.indexOf("可以")){
+				 $('#s1').removeClass();
+				 $('#s1').addClass("right");
+			 }else {
+				 $('#s1').removeClass();
+				 $('#s1').addClass("error");
+			 }
+			 
+		 },
+	 });
+ }
+ //方法2(用户名2)
+ function f2(){
+	 $('#s2').load("check.do","uname="+$('#i2').val());
+ }
+ function f3(){
+	 $.ajax({
+		 "url":"check.do",
+		 "type":"post",
+		 "data":"uname="+$("#i1").val(),
+		 "dataType":"json",
+		 "success":function(data){
+			 console.log(data);
+			 $('#s3').html(data);
+			 if(-1!=data.indexOf("可以")){
+				 $('#s3').removeClass();
+				 $('#s3').addClass("right");
+			 }else {
+				 $('#s3').removeClass();
+				 $('#s3').addClass("error");
+			 }
+			 
+		 },
+	 })
+ }
+ function f4(){
+	 console.log("f4()");
+	 $('#s1').html("");
+	 
+ }
+ function f5(){
+	 $('#s2').html("");
+ }
+
+</script>
+</head>
+<body style="font-size: 30px">
+  <fieldset>
+    <legend>登录</legend>
+    <form action="">
+      用户名:<input name="uname" id="i1"><span id="s1"></span><br>
+      用户名2:<input name="uname" id="i2"><span id="s2"></span><br>
+      密码:<input name="psd" type="password"><br>
+      <input id="b1" type="button" value="确定"><span id="s3"></span><br>
+    </form>
+  </fieldset>
+  
+</body>
+</html>

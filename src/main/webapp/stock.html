@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>股票实时行情</title>
+<style>
+  #d1 {
+    width:480px;
+    height:350px;
+    background-color: #222;
+    margin-left: 400px;
+    margin-top: 10px;
+    border-radius: 5%;
+  }
+  #d2 {
+    hieght: 33px;
+    background-color: #asd;
+    color: #c6c; 
+    text-align: center;
+    font-family: "新宋体";
+  }
+  table {
+    color:#ccc;
+    font-style: inherit;
+    font-size: 24px;
+  }
+  
+</style>
+<script src="js/jquery-1.11.1.js"></script>
+<script>
+  $(function(){
+	 //页面加载完成,每隔5秒，执行quoto函数
+	 setInterval(quoto, 500000); 
+  });
+  
+  /* 
+     向服务器发送异步请求,并且将服务器返回的json字符串解析出来,
+     然后更新表格
+  */
+  function quoto(){
+	  $.ajax({
+		  "url":"quoto.do",
+		  "type":"get",
+		  //"data":"uname=sally" "data":{"uname":"sally"}
+		  "dataType":"json",
+		  "success":function(data){
+			  /*
+			    用来处理服务器返回的数据
+			    data:服务器返回的数据
+			    注: 
+			    	如果服务器返回的是json字符串。
+			    	会自动转换成相应的js 
+			  */
+			$('#th1').empty();
+			for(var i = 0;i<data.length;i++){
+				var s = data[i];
+				$('#th1').append('<tr><td>'+s.code+'</td><td>'+
+				                            s.name+'</td><td>'+
+				                            s.price+'</td></tr>');
+			
+			}
+			
+		  },
+		  "error":function(){
+			  //处理异常
+			  $('#th1').append('<tr><td>系统繁忙!</td></tr>');
+		  }
+	  });
+  }
+  
+  
+</script>
+</head>
+<body style="font-size: 30px">
+  <div id="d1">
+    <div id="d2">股票实时行情</div>
+    <div id="d3">
+      <table width="100%">
+        <thead>
+          <tr>
+            <td>代码</td>
+            <td>名称</td>
+            <td>价格</td>
+          </tr>
+        </thead>
+        <tbody id="th1">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>
